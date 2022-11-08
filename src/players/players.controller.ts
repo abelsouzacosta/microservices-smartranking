@@ -1,8 +1,8 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { PlayersService } from './players.service';
-import { CreatePlayerDto } from './dto/create-player.dto';
-import { UpdatePlayerDto } from './dto/update-player.dto';
+import { CreatePlayerDto } from './domain/dto/create-player.dto';
+import { UpdatePlayerDto } from './domain/dto/update-player.dto';
 import { MessagePatterns } from 'src/common/enum/message-patterns.enum';
 
 @Controller()
