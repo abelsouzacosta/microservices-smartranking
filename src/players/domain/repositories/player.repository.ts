@@ -1,3 +1,4 @@
+import { RpcException } from '@nestjs/microservices';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Player } from 'src/players/entities/player.entity';
@@ -11,9 +12,13 @@ export class PlayerRepository implements IRepository {
   ) {}
 
   async create(data: CreatePlayerDto): Promise<Player> {
-    return this.model.create({
+    const player = this.model.create({
       ...data,
     });
+
+    if (!player) throw new RpcException(`Was not possible to create an user`);
+
+    return player;
   }
 
   async findByEmail(email: string): Promise<boolean> {

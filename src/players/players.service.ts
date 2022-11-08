@@ -8,15 +8,14 @@ import { PlayerRepository } from './domain/repositories/player.repository';
 export class PlayersService {
   constructor(private readonly repository: PlayerRepository) {}
 
-  async thorwsExceptionIfEmailAlreadyTaken(email: string) {
+  async emailMustBeUnique(email: string) {
     const emailAlreadyTaken = await this.repository.findByEmail(email);
 
-    if (emailAlreadyTaken)
-      throw new RpcException(`Email ${email} is already taken`);
+    if (emailAlreadyTaken) throw new RpcException(`email already taken`);
   }
 
-  create(data: CreatePlayerDto) {
-    this.thorwsExceptionIfEmailAlreadyTaken(data.email);
+  async create(data: CreatePlayerDto) {
+    await this.emailMustBeUnique(data.email);
 
     return this.repository.create(data);
   }
