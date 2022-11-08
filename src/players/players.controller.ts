@@ -14,7 +14,7 @@ export class PlayersController {
     return this.playersService.create(data);
   }
 
-  @MessagePattern('findAllPlayers')
+  @MessagePattern(MessagePatterns.LIST_PLAYERS)
   findAll() {
     return this.playersService.findAll();
   }

@@ -28,4 +28,8 @@ export class PlayerRepository implements IRepository {
       ? true
       : false;
   }
+
+  async list(): Promise<Array<Player>> {
+    return this.model.find();
+  }
 }
